@@ -2,6 +2,7 @@ package com.kiven.tools.databases;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -11,6 +12,8 @@ import com.kiven.tools.annotation.DBProcessor;
 import com.kiven.tools.logutils.Logger;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,7 +84,71 @@ public class DBUtils {
         return 1;
     }
 
-    public static int query() {
-        return 1;
+    public static <T> List<T> query(Context context, Class<T> clazz, String... conditions) throws Exception{
+        List<T> list = new ArrayList<>();
+        SQLiteDatabase db = getDBHelper(context, clazz).getReadableDatabase();
+        if (db == null) {
+            return list;
+        }
+        String table = DBProcessor.getTableName(clazz);
+        String sql = "SELECT * FROM  " + table;
+        if (conditions.length > 0) {
+            sql += " WHERE ";
+            for (String condition : conditions) {
+                sql += condition + " AND ";
+            }
+            sql = sql.substring(0, sql.length() - 5);
+        }
+        Logger.i(TAG, "sql = " + sql);
+
+        Field[] fields = clazz.getFields();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            T t = clazz.newInstance();
+            for (Field field : fields) {
+                if (field.isAnnotationPresent(Column.class)) {
+                    Method setter = getMethodSetter(field, clazz);
+                    if (setter == null) continue;
+                    String name = field.getAnnotation(Column.class).name();
+                    name = TextUtils.isEmpty(name) ? field.getName() : name;
+                    if (field.getType() == String.class) {
+                        String value = cursor.getString(cursor.getColumnIndex(name));
+                        setter.setAccessible(true);
+                        setter.invoke(t, value);
+                    } else if (field.getType() == int.class || field.getType() == Integer.class) {
+                        int value = cursor.getInt(cursor.getColumnIndex(name));
+                        setter.setAccessible(true);
+                        setter.invoke(t, value);
+                    }
+                }
+            }
+            list.add(t);
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+    public static Method getMethodSetter(Field field, Class clazz) {
+        char c = field.getName().charAt(0);
+        char c2;
+        String name;
+        if (field.getName().length() > 1) {
+            c2 = field.getName().charAt(1);
+            if (c == 'm' && Character.isUpperCase(c2)) {
+                name = "setm" + field.getName().substring(1);
+            } else {
+                name = "set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+            }
+        } else {
+            name = "set" + field.getName().substring(0, 1).toUpperCase();
+        }
+        Method setter = null;
+        try {
+            setter = clazz.getMethod(name, field.getType());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return setter;
     }
 }

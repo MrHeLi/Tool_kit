@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.kiven.sample.db.User;
 import com.kiven.tools.databases.DBUtils;
+import com.kiven.tools.logutils.Logger;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -14,7 +17,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user = new User( 2, "jianyan", 18);
-        DBUtils.add(this, user);
+//        User user = new User( 3, "jianyushan", 16);
+//        DBUtils.add(this, user);
+        try {
+            List<User> query = DBUtils.query(this, User.class, "_age < 20");
+            Logger.i(TAG, "query = " + query.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
