@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 //        User user = new User( 3, "jianyushan", 16);
 //        DBUtils.add(this, user);
         try {
-            List<User> query = DBUtils.query(this, User.class, "_age < 20");
+            List<User> query = DBUtils.query(this, User.class);
             Logger.i(TAG, "query = " + query.toString());
         } catch (Exception e) {
             e.printStackTrace();

@@ -80,10 +80,6 @@ public class DBUtils {
         return 1;
     }
 
-    public static int update() {
-        return 1;
-    }
-
     public static <T> List<T> query(Context context, Class<T> clazz, String... conditions) throws Exception{
         List<T> list = new ArrayList<>();
         SQLiteDatabase db = getDBHelper(context, clazz).getReadableDatabase();
