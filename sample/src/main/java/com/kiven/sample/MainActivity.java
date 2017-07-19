@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 //        DBUtils.add(this, user);
         try {
             List<User> query = DBUtils.query(this, User.class);
-            Logger.i(TAG, "query = " + query.toString());
+            Logger.i(TAG, "query =  " + query.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
