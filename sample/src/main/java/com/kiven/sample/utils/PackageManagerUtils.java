@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.kiven.tools.logutils.Logger;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;

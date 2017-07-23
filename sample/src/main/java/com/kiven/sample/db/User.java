@@ -20,10 +20,11 @@ public class User {
 
     public User(){}
 
-    public User(int id, String name, int age) {
+    public User(int id, String name, int age, String pwd) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.mPwd = pwd;
     }
 
     public int getId() {
@@ -60,6 +61,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "[ id = " + id + " : name = " + name + " : age = " + age + " ]";
+        return "[ id = " + id + " : name = " + name + " : age = " + age +
+                 " : mpwd = " + mPwd + " ]";
     }
 }

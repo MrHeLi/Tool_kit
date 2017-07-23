@@ -1,7 +1,7 @@
 package com.kiven.sample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.kiven.sample.db.User;
 import com.kiven.tools.databases.DBUtils;
@@ -17,13 +17,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        User user = new User( 3, "jianyushan", 16);
+//        User user = new User( 9, "jianli", 20, "540031");
 //        DBUtils.add(this, user);
+        DBUtils.delete(this, User.class, "_id = 1");
         try {
             List<User> query = DBUtils.query(this, User.class);
             Logger.i(TAG, "query =  " + query.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 }

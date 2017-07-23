@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.kiven.tools.annotation.Column;
@@ -76,8 +75,21 @@ public class DBUtils {
         return replace;
     }
 
-    public static int delete() {
-        return 1;
+    public static <T> void delete(Context context, Class<T> clazz, String... conditions) {
+        SQLiteDatabase db = getDBHelper(context, clazz).getWritableDatabase();
+        String table = DBProcessor.getTableName(clazz);
+        String sql = "DELETE FROM " + table;
+        if (conditions.length == 0) {
+            db.execSQL(sql);
+        } else {
+            sql += " WHERE ";
+            for (String condition : conditions) {
+                sql += condition + " AND ";
+            }
+            sql = sql.substring(0, sql.length() - 5);
+            db.execSQL(sql);
+        }
+        db.close();
     }
 
     public static <T> List<T> query(Context context, Class<T> clazz, String... conditions) throws Exception{
