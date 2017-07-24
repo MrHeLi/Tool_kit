@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        User user = new User( 9, "jianli", 20, "540031");
-//        DBUtils.add(this, user);
+        User user = new User( 9, "jianli", 20, "540031");
+        DBUtils.add(this, user);
         DBUtils.delete(this, User.class, "_id = 1");
         try {
-            List<User> query = DBUtils.query(this, User.class);
+            List<User> query = DBUtils.query(this, User.class, "_id > 9");
             Logger.i(TAG, "query =  " + query.toString());
         } catch (Exception e) {
             e.printStackTrace();

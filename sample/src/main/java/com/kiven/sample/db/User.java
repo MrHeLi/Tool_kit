@@ -15,8 +15,6 @@ public class User {
     public String name;
     @Column(name = "_age")
     public int age;
-    @Column(name = "_mPwd")
-    public String mPwd;
 
     public User(){}
 
@@ -24,7 +22,6 @@ public class User {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.mPwd = pwd;
     }
 
     public int getId() {
@@ -51,17 +48,8 @@ public class User {
         this.age = age;
     }
 
-    public String getmPwd() {
-        return mPwd;
-    }
-
-    public void setmPwd(String mPwd) {
-        this.mPwd = mPwd;
-    }
-
     @Override
     public String toString() {
-        return "[ id = " + id + " : name = " + name + " : age = " + age +
-                 " : mpwd = " + mPwd + " ]";
+        return "[ id = " + id + " : name = " + name + " : age = " + age + " ]";
     }
 }

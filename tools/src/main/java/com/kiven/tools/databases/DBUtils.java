@@ -40,6 +40,13 @@ public class DBUtils {
         return new DBHelper(context, databases, table, sql);
     }
 
+    /**
+     * 添加或者更新数据库记录。如果数据库中存在该条记录则更新，如果不存在则插入记录。
+     * @param context   上下文
+     * @param t 需要执行操作的数据对象。
+     * @param <T> 数据原型
+     * @return  the row ID of the newly inserted row, or -1 if an error occurred
+     */
     public static <T> long add(Context context, T t) {
         Class<?> clazz = t.getClass();
         String tableName = DBProcessor.getTableName(clazz);
@@ -75,6 +82,13 @@ public class DBUtils {
         return replace;
     }
 
+    /**
+     * 删除全部的数据库表记录，或指定的记录
+     * @param context   上下文
+     * @param clazz 数据原型
+     * @param conditions 删除条件，如果没有删除条件，则删除整个数据库表中的数据
+     * @param <T> 数据原型
+     */
     public static <T> void delete(Context context, Class<T> clazz, String... conditions) {
         SQLiteDatabase db = getDBHelper(context, clazz).getWritableDatabase();
         String table = DBProcessor.getTableName(clazz);
@@ -92,6 +106,15 @@ public class DBUtils {
         db.close();
     }
 
+    /**
+     * 查询指定的数据记录，以数据原型集合的形式返回。
+     * @param context   上下文
+     * @param clazz 数据原型
+     * @param conditions    查询条件，如果未指定查询条件，则查询全部
+     * @param <T> 数据原型
+     * @return  查询结果的集合
+     * @throws Exception 异常抛出
+     */
     public static <T> List<T> query(Context context, Class<T> clazz, String... conditions) throws Exception{
         List<T> list = new ArrayList<>();
         SQLiteDatabase db = getDBHelper(context, clazz).getReadableDatabase();
@@ -137,7 +160,7 @@ public class DBUtils {
         return list;
     }
 
-    public static Method getMethodSetter(Field field, Class clazz) {
+    private static Method getMethodSetter(Field field, Class clazz) {
         char c = field.getName().charAt(0);
         char c2;
         String name;
