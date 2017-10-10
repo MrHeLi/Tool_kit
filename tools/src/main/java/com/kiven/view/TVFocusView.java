@@ -55,6 +55,5 @@ public class TVFocusView extends View {
         Log.i(TAG, "x: " + x + " y: " + y + " width: " +width + " height: " + height);
         RectF rect = new RectF(shineWidth, shineWidth, width, height);
         canvas.drawRoundRect(rect, 10, 10, mPaint);
-        canvas.drawRoundRect(rect, 10, 10, mPaint);
     }
 }
