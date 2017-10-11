@@ -22,7 +22,7 @@ import java.util.Date;
 public class PictureActivity extends AppCompatActivity {
     String Tag = "Camera";
 
-    private Camera mCamera;
+    private static Camera mCamera;
     private CameraPreview mPreview;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
@@ -31,7 +31,6 @@ public class PictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
-
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
@@ -49,6 +48,7 @@ public class PictureActivity extends AppCompatActivity {
 
         // Add a listener to the Capture button
         Button captureButton = (Button) findViewById(R.id.button_capture);
+        captureButton.requestFocus();
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -143,6 +143,10 @@ public class PictureActivity extends AppCompatActivity {
      * A safe way to get an instance of the Camera object.
      */
     public static Camera getCameraInstance() {
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
+        }
         Camera c = null;
         try {
             c = Camera.open(); // attempt to get a Camera instance
@@ -151,4 +155,21 @@ public class PictureActivity extends AppCompatActivity {
         }
         return c; // returns null if camera is unavailable
     }
+
+//    private void setupCamera(int width, int height) {
+//        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+//        try {
+//            for(String cameraId : cameraManager.getCameraIdList()) {
+////                CameraCharacteristics cameraCharacteristics = cameraManager.getCameraCharacteristics(cameraId);
+////                if (cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) ==
+////                        CameraCharacteristics.LENS_FACING_FRONT) {
+////                    continue;
+////                }
+//                mCameraId = cameraId;
+//                return;
+//            }
+//        } catch (CameraAccessException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

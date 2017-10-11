@@ -2,7 +2,7 @@ package com.hitv.media;
 
 import android.content.Context;
 import android.hardware.Camera;
-import android.telecom.Log;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -75,5 +75,21 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         // empty. Take care of releasing the Camera preview in your activity.
+        stopPreviewDisplay();
+    }
+
+    private void stopPreviewDisplay(){
+        checkCamera();
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e){
+            Log.i(Tag, "Error while STOP preview for camera", e);
+        }
+    }
+
+    private void checkCamera(){
+        if(mCamera == null) {
+            throw new IllegalStateException("Camera must be set when start/stop preview, call <setCamera(Camera)> to set");
+        }
     }
 }

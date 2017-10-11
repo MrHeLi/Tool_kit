@@ -53,6 +53,7 @@ public class VideoActivity extends Activity {
 
         // Add a listener to the Capture button
         final Button captureButton = (Button) findViewById(R.id.button_capture);
+        captureButton.requestFocus();
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -105,7 +106,7 @@ public class VideoActivity extends Activity {
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
 
         // Step 4: Set output file
         mMediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());
