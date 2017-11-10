@@ -6,11 +6,14 @@ import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import com.kiven.tools.logutils.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +41,8 @@ public class VideoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+        long start = SystemClock.currentThreadTimeMillis();
+
         // Create an instance of Camera
         mCamera = getCameraInstance();
         // get Camera parameters
@@ -86,6 +91,9 @@ public class VideoActivity extends Activity {
                     }
                 }
         );
+
+        long end = SystemClock.currentThreadTimeMillis();
+        Logger.i(TAG, "time start: " + (end - start));
     }
 
 
@@ -103,6 +111,7 @@ public class VideoActivity extends Activity {
 
         // Step 2: Set sources
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+//        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)

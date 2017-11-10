@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TVChatView">
+        <attr name="idTitle" format="string"/>
+        <attr name="idMessageList" format="string"/>
+        <attr name="idInput" format="string"/>
+    </declare-styleable>
+</resources>

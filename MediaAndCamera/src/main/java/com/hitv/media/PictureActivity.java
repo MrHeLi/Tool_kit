@@ -61,6 +61,12 @@ public class PictureActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mCamera.release();
@@ -156,20 +162,4 @@ public class PictureActivity extends AppCompatActivity {
         return c; // returns null if camera is unavailable
     }
 
-//    private void setupCamera(int width, int height) {
-//        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-//        try {
-//            for(String cameraId : cameraManager.getCameraIdList()) {
-////                CameraCharacteristics cameraCharacteristics = cameraManager.getCameraCharacteristics(cameraId);
-////                if (cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) ==
-////                        CameraCharacteristics.LENS_FACING_FRONT) {
-////                    continue;
-////                }
-//                mCameraId = cameraId;
-//                return;
-//            }
-//        } catch (CameraAccessException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
