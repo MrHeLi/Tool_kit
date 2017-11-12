@@ -5,7 +5,8 @@ package com.kiven.view.tv;
  * Details:
  */
 
-class IMessage {
-    int id;
-    String detail;
+public class IMessage {
+    public static final int TYPE_MESSAGE_SEND = 1, TYPE_MESSAGE_RECEIVE = 2;
+    public int type;
+    public String detail;
 }

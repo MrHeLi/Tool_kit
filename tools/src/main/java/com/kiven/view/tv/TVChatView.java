@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.kiven.tools.R;
 
+import java.util.List;
+
 /**
  * Created by Kiven on 2017/11/10.
  * Details:
@@ -21,6 +23,8 @@ public class TVChatView extends FrameLayout {
 
     private TextView tv_title;
     private RecyclerView msgList;
+    private List<IMessage> data;
+    private MessageAdapter adapter;
 
     public TVChatView(@NonNull Context context) {
         this(context, null);
@@ -50,8 +54,15 @@ public class TVChatView extends FrameLayout {
                 getContext(), LinearLayoutManager.VERTICAL, true);//TODO 第三个参数尝试一下false看看效果。
         layoutManager.setStackFromEnd(true);//TODO 参数尝试一下false看看效果。
         msgList.setLayoutManager(layoutManager);
+        adapter = new MessageAdapter(context);
+        msgList.setAdapter(adapter);
 
+    }
 
+    public void setData(List<IMessage> data) {
+        this.data = data;
+        adapter.addData(this.data);
+        adapter.notifyDataSetChanged();
     }
 
     public void setTile(String title) {

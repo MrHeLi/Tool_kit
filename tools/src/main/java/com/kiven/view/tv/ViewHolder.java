@@ -8,11 +8,11 @@ import android.view.View;
  * Details:
  */
 
-public abstract class ViewHolder<DATA> extends RecyclerView.ViewHolder {
+public abstract class ViewHolder<T> extends RecyclerView.ViewHolder {
 
     public ViewHolder(View itemView) {
         super(itemView);
     }
 
-    public abstract void onBind(DATA data);
+    public abstract void onBind(T data);
 }

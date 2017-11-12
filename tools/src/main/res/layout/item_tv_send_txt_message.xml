@@ -28,15 +28,15 @@
             android:id="@+id/iv_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:src="@drawable/avatar_receive_default"/>
-
         <TextView
             android:id="@+id/tv_msgitem_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_toLeftOf="@id/iv_avatar"
             android:layout_alignParentTop="true"
-            android:background="@drawable/receivetxt_bubble_selected"
+            android:background="@drawable/sendtxt_bubble_selected"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"

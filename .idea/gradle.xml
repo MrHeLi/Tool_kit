@@ -8,9 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/MediaAndCamera" />
-            <option value="$PROJECT_DIR$/sample" />
             <option value="$PROJECT_DIR$/tools" />
+            <option value="$PROJECT_DIR$/viewtv" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
