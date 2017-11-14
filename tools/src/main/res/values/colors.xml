@@ -2,5 +2,7 @@
 <resources>
     <!-- Chat View TV -->
     <color name="chat_title_bg">#427BED</color>
+    <color name="bg_edittext_default">#e5e5e5</color>
+    <color name="bg_edittext_focus">#3f80dc</color>
     <!-- Chat View TV -->
 </resources>

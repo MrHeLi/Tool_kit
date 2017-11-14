@@ -20,8 +20,10 @@
         tools:text="15:32"/>
 
     <RelativeLayout
+        android:id="@+id/rl_msg_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="2dp"
         android:layout_marginTop="4dp">
 
         <ImageView
@@ -29,15 +31,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/avatar_receive_default"/>
+            android:src="@drawable/avatar_send_default"/>
         <TextView
             android:id="@+id/tv_msgitem_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/iv_avatar"
             android:layout_alignParentTop="true"
-            android:background="@drawable/sendtxt_bubble_selected"
+            android:background="@drawable/qq_text_send"
             android:clickable="true"
+            android:focusableInTouchMode="true"
             android:focusable="true"
             android:gravity="center"
             tools:text="嗨，你好啊！" />

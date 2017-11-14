@@ -1,13 +1,15 @@
 package com.kiven.view.tv;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.kiven.tools.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,17 +17,23 @@ import java.util.List;
  * Details:
  */
 
-public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private String TAG = "MessageAdapter";
     private LayoutInflater inflater;
-    private List<IMessage> data = new ArrayList<>();
+    private List<IMessage> data;
 
     public MessageAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
     }
 
-    public void addData(List<IMessage> data) {
-        this.data.addAll(data);
+    public void initData(List<IMessage> data) {
+        this.data= data;
+    }
+
+    public void addData(IMessage message) {
+        this.data.add(0, message);
+        notifyItemRangeInserted(0, 1);
     }
 
     @Override
@@ -41,18 +49,71 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         parent, false));
             case IMessage.TYPE_MESSAGE_SEND:
                 return new SendViewHolder(inflater.inflate(R.layout.item_tv_send_txt_message,
-                        parent,false));
+                        parent, false));
         }
         return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((AbsViewHolder) holder).onBind(data.get(position));
+        holder.itemView.setFocusable(true);
+        holder.itemView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                switch (keyCode) {
+                    case KeyEvent.KEYCODE_DPAD_DOWN:
+                        if (position == 0) {
+                            if (noFocusedListener != null) {
+                                noFocusedListener.onNoneFocus();
+                            }
+                            return true;
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+        holder.itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    focusStatus(v.findViewById(R.id.rl_msg_detail));
+                } else {
+                    normalStatus(v.findViewById(R.id.rl_msg_detail));
+                }
+            }
+
+            private void focusStatus(View itemView) {
+                if (itemView == null) {
+                    return;
+                }
+                ViewCompat.animate(itemView).scaleX(0.95f).scaleY(1.10f).translationZ(0.5f).start();
+            }
+
+            private void normalStatus(View itemView) {
+                if (itemView == null) {
+                    return;
+                }
+                ViewCompat.animate(itemView).scaleX(1.0f).scaleY(1.0f).translationZ(0).start();
+            }
+
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    interface OnNoneFocusedListener {
+        void onNoneFocus();
+    }
+
+    private OnNoneFocusedListener noFocusedListener;
+
+    public void setOnNoneFocusedListtener(OnNoneFocusedListener listtener) {
+        noFocusedListener = listtener;
     }
 }

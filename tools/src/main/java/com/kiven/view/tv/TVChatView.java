@@ -6,9 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kiven.tools.R;
 
@@ -21,10 +25,13 @@ import java.util.List;
 
 public class TVChatView extends FrameLayout {
 
+    private String TAG = "TVChatView";
     private TextView tv_title;
     private RecyclerView msgList;
     private List<IMessage> data;
     private MessageAdapter adapter;
+    private EditText et_messge;
+    private Button bt_send;
 
     public TVChatView(@NonNull Context context) {
         this(context, null);
@@ -45,27 +52,85 @@ public class TVChatView extends FrameLayout {
     }
 
     private void initView(Context context) {
-        View.inflate(context, R.layout.tv_chat,TVChatView.this);
+        View.inflate(context, R.layout.tv_chat, TVChatView.this);
         tv_title = (TextView) this.findViewById(R.id.tv_title);
         msgList = (RecyclerView) this.findViewById(R.id.rv_msgList);
+        et_messge = (EditText) findViewById(R.id.et_message);
+        bt_send = (Button) findViewById(R.id.bt_send);
+        bt_send.setOnClickListener(sendListener);
     }
+
     private void initData(Context context) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, true);//TODO 第三个参数尝试一下false看看效果。
         layoutManager.setStackFromEnd(true);//TODO 参数尝试一下false看看效果。
         msgList.setLayoutManager(layoutManager);
         adapter = new MessageAdapter(context);
+        adapter.setOnNoneFocusedListtener(msgListNoFocusedListener);
         msgList.setAdapter(adapter);
-
+        msgList.scrollToPosition(0);
+        et_messge.requestFocus();
     }
 
     public void setData(List<IMessage> data) {
         this.data = data;
-        adapter.addData(this.data);
+        adapter.initData(this.data);
         adapter.notifyDataSetChanged();
     }
 
     public void setTile(String title) {
         tv_title.setText(title);
     }
+
+    public View getFocusedItem() {
+        if (msgList != null) {
+            return msgList.getFocusedChild();
+        }
+        return null;
+    }
+
+    public void setInputFocus() {
+        if (et_messge != null) {
+            et_messge.requestFocus();
+        }
+    }
+
+    public View getMessageListChildFocusView() {
+        msgList.getNextFocusDownId();
+        return msgList.getFocusedChild();
+    }
+
+    public boolean getMessageListFocuseChange() {
+        if (msgList.getNextFocusDownId() == R.id.et_message) {
+            return false;//表示失去焦点
+        } else {
+            return true;
+        }
+    }
+
+    OnClickListener sendListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.i(TAG, "send click");
+            String msg = et_messge.getText().toString().trim();
+            if (msg.isEmpty()) {
+                Toast.makeText(TVChatView.this.getContext(), "输入不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                IMessage iMessage = new IMessage();
+                iMessage.type = IMessage.TYPE_MESSAGE_SEND;
+                iMessage.detail = msg;
+                adapter.addData(iMessage);
+                msgList.scrollToPosition(0);
+            }
+        }
+    };
+
+    MessageAdapter.OnNoneFocusedListener msgListNoFocusedListener = new MessageAdapter.OnNoneFocusedListener() {
+        @Override
+        public void onNoneFocus() {
+            setInputFocus();
+        }
+    };
+
 }

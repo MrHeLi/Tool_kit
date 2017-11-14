@@ -20,8 +20,10 @@
         tools:text="15:32"/>
 
     <RelativeLayout
+        android:id="@+id/rl_msg_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="10dp"
         android:layout_marginTop="4dp">
 
         <ImageView
@@ -36,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_avatar"
             android:layout_alignParentTop="true"
-            android:background="@drawable/receivetxt_bubble_selected"
+            android:background="@drawable/qq_text_receive"
+            android:focusableInTouchMode="true"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
