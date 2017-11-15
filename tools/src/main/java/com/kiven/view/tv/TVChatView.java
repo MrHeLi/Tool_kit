@@ -62,15 +62,17 @@ public class TVChatView extends FrameLayout {
 
     private void initData(Context context) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(
-                getContext(), LinearLayoutManager.VERTICAL, true);//TODO 第三个参数尝试一下false看看效果。
-        layoutManager.setStackFromEnd(true);//TODO 参数尝试一下false看看效果。
+                getContext(), LinearLayoutManager.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
         msgList.setLayoutManager(layoutManager);
         adapter = new MessageAdapter(context);
         adapter.setOnNoneFocusedListtener(msgListNoFocusedListener);
         msgList.setAdapter(adapter);
+        msgList.addOnLayoutChangeListener(layoutChangeListener);
         msgList.scrollToPosition(0);
         et_messge.requestFocus();
-    }
+}
 
     public void setData(List<IMessage> data) {
         this.data = data;
@@ -130,6 +132,22 @@ public class TVChatView extends FrameLayout {
         @Override
         public void onNoneFocus() {
             setInputFocus();
+        }
+    };
+
+    OnLayoutChangeListener layoutChangeListener = new View.OnLayoutChangeListener() {
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            if (bottom < oldBottom) {
+                msgList.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        msgList.scrollToPosition(0);
+                    }
+
+                },20);
+            }
+
         }
     };
 

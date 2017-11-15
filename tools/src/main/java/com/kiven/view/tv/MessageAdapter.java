@@ -27,6 +27,10 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.inflater = LayoutInflater.from(context);
     }
 
+    public List<IMessage> getData() {
+        return data;
+    }
+
     public void initData(List<IMessage> data) {
         this.data= data;
     }
