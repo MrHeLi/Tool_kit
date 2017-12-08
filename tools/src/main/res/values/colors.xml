@@ -5,4 +5,5 @@
     <color name="bg_edittext_default">#e5e5e5</color>
     <color name="bg_edittext_focus">#3f80dc</color>
     <!-- Chat View TV -->
+    <color name="colorPrimary">#3F51B5</color>
 </resources>

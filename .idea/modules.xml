@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://J:\Project\android\Tool_kit\MediaAndCamera\MediaAndCamera.iml" filepath="J:\Project\android\Tool_kit\MediaAndCamera\MediaAndCamera.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tool_kit.iml" filepath="$PROJECT_DIR$/Tool_kit.iml" />
-      <module fileurl="file://J:\Project\android\Tool_kit\sample\sample.iml" filepath="J:\Project\android\Tool_kit\sample\sample.iml" />
+      <module fileurl="file://D:\install\dev\AS\workspace\Tool_kit\DB\sample.iml" filepath="D:\install\dev\AS\workspace\Tool_kit\DB\sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/tools/tools.iml" filepath="$PROJECT_DIR$/tools/tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/viewtv/viewtv.iml" filepath="$PROJECT_DIR$/viewtv/viewtv.iml" />
     </modules>

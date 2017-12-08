@@ -17,13 +17,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Leanback">
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".MessageChatActivity"
+            android:name=".RippleActivity"
             android:banner="@drawable/app_icon_your_company"
             android:icon="@drawable/app_icon_your_company"
             android:label="@string/app_name"
             android:logo="@drawable/app_icon_your_company"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +32,11 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MessageChatActivity"/>
+
+        <activity android:name=".test.TestAcitivity"/>
+
     </application>
 
 </manifest>

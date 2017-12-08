@@ -1,4 +1,6 @@
 <resources>
+    <color name="background_contact">#A8B2A6</color>
+    <color name="background_contact_selected">#9BA29B</color>
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="fastlane_background">#0096a6</color>
