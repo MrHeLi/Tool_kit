@@ -3,18 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <com.kiven.view.all.WaterRippleView
         android:id="@+id/wrv_water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:rippleCenterX="960"
+        app:rippleCenterY="360"
+        app:rippleMixRadius="30"
         app:rippleColor="#fd9200"
-        app:rippleCenterIcon="@drawable/ic_water_ripple"
-        app:rippleCount="3"
-        app:rippleSpacing="20dp"
+        app:rippleCount="10"
+        app:rippleSpacing="10dp"
+        app:rippleExpand="true"
         app:rippleAutoRunning="true"/>
+
+    <!--<com.kiven.view.all.WaterRippleView-->
+        <!--android:id="@+id/wrv_water1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--app:rippleColor="#fd9200"-->
+        <!--app:rippleCount="3"-->
+        <!--app:rippleSpacing="20dp"-->
+        <!--app:rippleExpand="false"-->
+        <!--app:rippleAutoRunning="true"/>-->
 
 </LinearLayout>

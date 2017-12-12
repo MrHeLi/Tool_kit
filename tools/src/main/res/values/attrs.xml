@@ -10,7 +10,10 @@
         <attr name="rippleSpacing" format="dimension|reference"/>
         <attr name="rippleCount" format="integer|reference"/>
         <attr name="rippleColor" format="color|reference"/>
-        <attr name="rippleCenterIcon" format="reference"/>
         <attr name="rippleAutoRunning" format="boolean"/>
+        <attr name="rippleExpand" format="boolean"/>
+        <attr name="rippleMixRadius" format="integer"/>
+        <attr name="rippleCenterX" format="integer"/>
+        <attr name="rippleCenterY" format="integer"/>
     </declare-styleable>
 </resources>
