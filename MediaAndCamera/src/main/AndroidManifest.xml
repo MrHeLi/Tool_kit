@@ -30,6 +30,7 @@
         <activity
             android:name=".VideoActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".AudioActivity"/>
     </application>
 
 </manifest>

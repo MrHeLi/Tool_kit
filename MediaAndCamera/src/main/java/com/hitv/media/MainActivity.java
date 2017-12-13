@@ -26,7 +26,7 @@ public class MainActivity  extends Activity{
             case R.id.button_picture:
                 startActivity(new Intent(this, PictureActivity.class));
                 break;
-            case R.id.button_audio:
+            case R.id.button_record:
                 startActivity(new Intent(this, AudioActivity.class));
         }
     }
