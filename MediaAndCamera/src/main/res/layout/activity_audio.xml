@@ -17,4 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="stop record"/>
+    <Button
+        android:id="@+id/button_play"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="play record"/>
 </LinearLayout>
