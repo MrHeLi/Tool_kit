@@ -104,7 +104,7 @@ public class AudioController {
                     AudioFormat.ENCODING_PCM_16BIT);
             audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate,
                     AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT,
-                    trackBufSize, AudioTrack.MODE_STATIC);
+                    trackBufSize, AudioTrack.MODE_STREAM);
             File pcmStorageRootFile = StorageUtils.getSDCardPath("/MediaAndCamera/");
             if (pcmStorageRootFile.exists()) {
                 File[] files = pcmStorageRootFile.listFiles();
