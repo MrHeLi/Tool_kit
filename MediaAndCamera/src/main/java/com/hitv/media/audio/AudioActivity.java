@@ -1,18 +1,11 @@
-package com.hitv.media;
+package com.hitv.media.audio;
 
 import android.app.Activity;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.kiven.tools.StorageUtils;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.hitv.media.R;
 
 /**
  * Created by Kiven on 2017/12/11.

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.hitv.media.audio.AudioActivity;
+
 /**
  * Created by Kiven on 2017/10/10.
  * Details:

@@ -26,11 +26,11 @@
         </activity>
         <activity
             android:name=".PictureActivity"
-            android:screenOrientation="landscape"/>
+        android:screenOrientation="landscape"/>
         <activity
             android:name=".VideoActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".AudioActivity"/>
+        <activity android:name=".audio.AudioActivity"/>
     </application>
 
 </manifest>

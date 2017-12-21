@@ -1,4 +1,4 @@
-package com.hitv.media;
+package com.hitv.media.audio;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

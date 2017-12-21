@@ -1,5 +1,6 @@
 package com.hitv.media;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -35,17 +36,18 @@ public class PictureActivity extends AppCompatActivity {
         // Create an instance of Camera
         mCamera = getCameraInstance();
         // get Camera parameters
-        Camera.Parameters params = mCamera.getParameters();
-        // set the focus mode
-        params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        // set Camera parameters
-        mCamera.setParameters(params);
+        if (mCamera != null) {
+            Camera.Parameters params = mCamera.getParameters();
+            // set the focus mode
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            // set Camera parameters
+            mCamera.setParameters(params);
 
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
+            // Create our Preview view and set it as the content of our activity.
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
+        }
         // Add a listener to the Capture button
         Button captureButton = (Button) findViewById(R.id.button_capture);
         captureButton.requestFocus();
@@ -155,11 +157,46 @@ public class PictureActivity extends AppCompatActivity {
         }
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            int CammeraIndex = FindBackCamera();
+            if (CammeraIndex == -1) {
+                CammeraIndex = FindFrontCamera();
+            }
+//            c = Camera.open(CammeraIndex); // attempt to get a Camera instance
+            c = Camera.open();
         } catch (Exception e) {
+            e.printStackTrace();
             // Camera is not available (in use or does not exist)
-        }
+    }
         return c; // returns null if camera is unavailable
+    }
+
+    public static int FindFrontCamera() {
+        int cameraCount = 0;
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        cameraCount = Camera.getNumberOfCameras(); // get cameras number
+
+        for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
+            Camera.getCameraInfo(camIdx, cameraInfo); // get camerainfo
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                return camIdx;
+            }
+        }
+        return -1;
+    }
+
+    @TargetApi(9)
+    public static int FindBackCamera() {
+        int cameraCount = 0;
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        cameraCount = Camera.getNumberOfCameras(); // get cameras number
+
+        for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
+            Camera.getCameraInfo(camIdx, cameraInfo); // get camerainfo
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                return camIdx;
+            }
+        }
+        return -1;
     }
 
 }
