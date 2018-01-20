@@ -5,29 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.kiven.view.all.WaterRippleView
-        android:id="@+id/wrv_water"
+    <!--<com.kiven.view.all.WaterRippleView-->
+    <!--android:id="@+id/wrv_water"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:rippleCenterX="960"-->
+    <!--app:rippleCenterY="360"-->
+    <!--app:rippleMixRadius="30"-->
+    <!--app:rippleColor="#fd9200"-->
+    <!--app:rippleCount="10"-->
+    <!--app:rippleSpacing="10dp"-->
+    <!--app:rippleExpand="true"-->
+    <!--app:rippleAutoRunning="true"/>-->
+
+    <com.kiven.view.all.SurfaceRippleView
+        android:id="@+id/srv_water"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:rippleAutoRunning="true"
         app:rippleCenterX="960"
         app:rippleCenterY="360"
-        app:rippleMixRadius="30"
-        app:rippleColor="#fd9200"
-        app:rippleCount="10"
-        app:rippleSpacing="10dp"
+        app:rippleColor="#ffffff"
+        app:rippleCount="4"
         app:rippleExpand="true"
-        app:rippleAutoRunning="true"/>
-
-    <!--<com.kiven.view.all.WaterRippleView-->
-        <!--android:id="@+id/wrv_water1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="20dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--app:rippleColor="#fd9200"-->
-        <!--app:rippleCount="3"-->
-        <!--app:rippleSpacing="20dp"-->
-        <!--app:rippleExpand="false"-->
-        <!--app:rippleAutoRunning="true"/>-->
+        app:rippleMixRadius="20"
+        app:rippleSpacing="50dp" />
 
 </LinearLayout>

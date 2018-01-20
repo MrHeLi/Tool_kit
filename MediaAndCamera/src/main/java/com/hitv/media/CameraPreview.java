@@ -13,19 +13,25 @@ import java.io.IOException;
  * Details:
  */
 
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback{
     String Tag = "CameraPreview";
     private SurfaceHolder mHolder;
     private Camera mCamera;
 
+    public CameraPreview(Context context) {
+        super(context, null);
+    }
+
     public CameraPreview(Context context, Camera camera) {
         super(context);
         mCamera = camera;
-
+        mCamera.setPreviewCallbackWithBuffer(this);
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
@@ -55,6 +61,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         // stop preview before making changes
         try {
+//            mCamera.setPreviewCallbackWithBuffer();
             mCamera.stopPreview();
         } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
@@ -92,5 +99,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         if(mCamera == null) {
             throw new IllegalStateException("Camera must be set when start/stop preview, call <setCamera(Camera)> to set");
         }
+    }
+
+    @Override
+    public void onPreviewFrame(byte[] data, Camera camera) {
+        Log.i(Tag, "data.");
     }
 }

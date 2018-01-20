@@ -1,6 +1,7 @@
 package com.hitv.media;
 
 import android.app.Activity;
+import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.kiven.tools.logutils.Logger;
+import com.kiven.view.all.SurfaceRippleView;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,6 +56,9 @@ public class VideoActivity extends Activity {
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
+
+//        SurfaceRippleView viewById = (SurfaceRippleView) findViewById(R.id.srv_water);
+//        viewById.setZOrderOnTop(true);
 
 
         // Add a listener to the Capture button
