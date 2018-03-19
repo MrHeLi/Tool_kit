@@ -51,6 +51,7 @@ public class VideoActivity extends Activity {
         Camera.Parameters params = mCamera.getParameters();
         // set the focus mode
         params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        params.setPreviewSize(1280, 720);
         // set Camera parameters
         mCamera.setParameters(params);
         mPreview = new CameraPreview(this, mCamera);

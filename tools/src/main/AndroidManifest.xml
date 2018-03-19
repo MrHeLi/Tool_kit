@@ -2,6 +2,9 @@
 
     package="com.kiven.tools">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application android:allowBackup="true" android:label="@string/app_name"
         android:supportsRtl="true">
 

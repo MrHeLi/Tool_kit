@@ -18,6 +18,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder mHolder;
     private Camera mCamera;
 
+    private byte[] mPreviewBuffer = null;
+    private int mPreviewBufferLen = 0;
+
     public CameraPreview(Context context) {
         super(context, null);
     }
@@ -25,11 +28,15 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public CameraPreview(Context context, Camera camera) {
         super(context);
         mCamera = camera;
-        mCamera.setPreviewCallbackWithBuffer(this);
+//        mCamera.setPreviewCallbackWithBuffer(this);
+//        mCamera.addCallbackBuffer();
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
+
+
+
         setFocusable(true);
         setFocusableInTouchMode(true);
         // deprecated setting, but required on Android versions prior to 3.0
@@ -41,8 +48,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
+            mCamera.setPreviewCallback(this);
             mCamera.setPreviewDisplay(holder);
-//            mCamera.setPreviewDisplay(null);
             mCamera.startPreview();
         } catch (IOException e) {
             Log.d(Tag, "Error setting camera preview: " + e.getMessage());
@@ -72,6 +79,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         // start preview with new settings
         try {
+//            mCamera.setPreviewCallbackWithBuffer(this);
+//            mPreviewBufferLen = 1920 * 1080 * 3 / 2;
+//            mPreviewBuffer = new byte[mPreviewBufferLen];
+//            mCamera.addCallbackBuffer(mPreviewBuffer);
+            mCamera.setPreviewCallback(this);
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
 
@@ -89,6 +101,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private void stopPreviewDisplay(){
         checkCamera();
         try {
+            mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
         } catch (Exception e){
             Log.i(Tag, "Error while STOP preview for camera", e);
@@ -104,5 +117,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
         Log.i(Tag, "data.");
+//        mCamera.addCallbackBuffer(mPreviewBuffer);
     }
 }
